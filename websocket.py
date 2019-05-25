@@ -1,24 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''
-import asyncio
-import websockets
-
-async def hello(websocket, path):
-    name = await websocket.recv()
-    print(f"< {name}")
-
-    greeting = f"hablame!"
-
-    await websocket.send(greeting)
-    print(f"> {greeting}")
-
-start_server = websockets.serve(hello, 'localhost', 8765)
-
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
-
-'''
+#simple_websocket_server is 
+#https://pypi.org/project/simple-websocket-server/
+#pip install simple-websocket-server
 from simple_websocket_server import WebSocketServer, WebSocket
 
 
