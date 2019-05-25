@@ -19,7 +19,7 @@ class MyHandler(BaseHTTPRequestHandler):
 		s.send_response(200)
 		s.send_header("Content-type", "application/json")
 		s.end_headers()
-		s.wfile.write("{\"hello\":\"do_DELETE!\"}")
+		s.wfile.write(b'{\"hello\":\"do_DELETE!\"}')
 		
 	def do_HEAD(s):
 		s.send_response(200)
@@ -30,19 +30,19 @@ class MyHandler(BaseHTTPRequestHandler):
 		s.send_response(200)
 		s.send_header("Content-type", "application/json")
 		s.end_headers()
-		s.wfile.write("{\"xA\":3.1415927, \"y\":\"am gone!!\"}")
+		s.wfile.write(b'{\"xA\":3.1415927, \"y\":\"am gone!!\"}')
 		
 	def do_PATCH(s):
 		s.send_response(410)
 		s.send_header("Content-type", "application/json")
 		s.end_headers()
-		s.wfile.write("{\"hello\":\"do_PITCH!\", \"x\":\"am gone!!\"}")
+		s.wfile.write(b'{\"hello\":\"do_PATCH!\", \"x\":\"am gone!!\"}')
 				
 	def do_PUT(s):
 		s.send_response(200)
 		s.send_header("Content-type", "application/json")
 		s.end_headers()
-		s.wfile.write("{\"hello\":\"PUT!\"}")
+		s.wfile.write(b'{\"hello\":\"PUT!\"}')
 		
 	def do_GET(s):
 		"""Respond to a GET request."""
@@ -72,9 +72,9 @@ class MyHandler(BaseHTTPRequestHandler):
 				s.send_response(200)
 				s.send_header('Content-type',mimetype)
 				s.end_headers()
-				print('f.reading4')
+				#print('f.reading4')
 				#print(f.read())
-				print('f.reading/end4')
+				#print('f.reading/end4')
 				s.wfile.write(f.read())
 				f.close()
 			return
@@ -85,9 +85,9 @@ class MyHandler(BaseHTTPRequestHandler):
 			# If someone went to "http://something.somewhere.net/foo/bar/",
 			# then s.path equals "/foo/bar/".
 			f = open(curdir + sep + '404.html', 'rb')
-			print('f.reading404')
-			print(f.read())
-			print('f.reading/end404') 
+			#print('f.reading404')
+			#print(f.read())
+			#print('f.reading/end404') 
 			s.wfile.write(f.read())
 			f.close()
 			#s.send_error(404,'File Not Found: %s' % s.path)
@@ -96,7 +96,7 @@ class MyHandler(BaseHTTPRequestHandler):
 	def do_POST(self):
 		#self.send_header("Content-type", "application/json")
 		
-		content_len = int(self.headers.getheader('content-length', 0))
+		content_len = int(self.headers.get('content-length', 0))
 		post_body = self.rfile.read(content_len)
 		print(post_body)
 		#print form.getvalue("x")
@@ -104,7 +104,7 @@ class MyHandler(BaseHTTPRequestHandler):
 		self.send_header('Content-type', 'application/json')
 		self.end_headers()
 		#print form.getvalue("bin")
-		self.wfile.write("{\"hello\":\"mundo!\"}")
+		self.wfile.write(b'{\"hello\":\"mundo!\"}')
 
 def run(server_class=HTTPServer, handler_class=MyHandler, port=PORT_NUMBER):
     logging.basicConfig(level=logging.INFO)

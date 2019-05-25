@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      
+      <script type = "text/javascript">
+			var ws; 
+			function onLoad()
+			{
+				//alert("Page is loaded");
+				ws = new WebSocket("ws://localhost:8765");
+				               ws.onopen = function() {
+                  // Web Socket is connected, send data using send()
+                  //ws.send("hello server!");
+                  console.log("Message is sent...");
+               };
+				
+				ws.onerror = function(event) {
+					console.error("WebSocket error observed:", event);
+				};
+				
+               ws.onmessage = function (evt) { 
+                  var received_msg = evt.data;
+                  //alert("Message is received...");
+                  console.log("Message is: " + received_msg);
+               };
+ 
+               ws.onclose = function() { 
+                  // websocket is closed.
+                  console.log("Connection is closed..."); 
+               };
+			}
+         /*
+         function WebSocketTest() {
+            
+            if ("WebSocket" in window) {
+               //alert("WebSocket is supported by your Browser!");
+               
+               // Let us open a web socket
+               //var ws = new WebSocket("ws://localhost:8765");
+				
+
+            } else {
+              
+               // The browser doesn't support WebSocket
+               alert("WebSocket NOT supported by your Browser!");
+            }
+         }*/
+		function sendText()
+		{
+			var x = document.getElementById("myText").value;
+
+			console.log("text is: " + x); 
+			ws.send(x);
+
+			document.getElementById("myText").value = "not anymore";
+			
+		}
+      </script>
+		
+   </head>
+   
+   <body onload="onLoad()">
+	   Name: <input type="text" id="myText" value="jose">
+
+      <div id = "sse">
+         <a href = "javascript:WebSocketTest()">Run WebSocket</a>
+         <button onclick="sendText()">sendText!</button>
+
+      </div>
+      
+   </body>
+</html>
