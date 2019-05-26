@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from os import curdir, sep
@@ -47,7 +47,8 @@ class MyHandler(BaseHTTPRequestHandler):
 	def do_GET(s):
 		"""Respond to a GET request."""
 		if s.path=="/":
-			s.path="/index.html"
+			#s.path="/index.html"
+			s.path="/loginv14.html"
 		try:
 			sendReply = False
 			if s.path.endswith(".html"):
